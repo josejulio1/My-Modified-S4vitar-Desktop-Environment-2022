@@ -4,6 +4,8 @@ clear
 
 USER=$(ls /home)
 
+# JUST FOR ARCH LINUX
+
 # loadkeys es
 # cfdisk
 # mkfs...
