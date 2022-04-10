@@ -75,10 +75,7 @@ execute() {
     sudo rm -r iosevka-2.2.1 iosevka-slab-2.2.1
 
     # Icommon
-    export DISPLAY=:0
-    firefox --new-window https://www.dropbox.com/s/hrkub2yo9iapljz/icomoon.zip
-    cd /usr/share/fonts
-    sudo mv /home/$USER/Downloads/icomoon.zip .
+    sudo mv $(git rev-parse --show-toplevel)/icomoon.zip .
     sudo unzip icomoon.zip
     sudo mv icomoon/*.ttf .
     sudo rm -rf icomoon icomoon.zip
@@ -105,14 +102,12 @@ execute() {
     localectl set-x11-keymap es
 
     # Zsh Config
-    firefox --new-window https://github.com/s4vitar/s4vitar.github.io/blob/master/_posts/2020-01-30-bspwm-configuration-files.md#archivo-zshrc
+    cd /home/$USER
+    rm .zshrc
+    mv $(git rev-parse --show-toplevel)/.zshrc .
     sudo ln -s /home/$USER/.zshrc /root/.zshrc
     # vim .zshrc
     paru -S --noconfirm zsh-syntax-highlighting zsh-autosuggestions
-    sed -i '46d' /home/$USER/.zshrc
-    sed -i '65 c\source \/usr\/share\/zsh\/plugins\/zsh-syntax-highlighting\/zsh-syntax-highlighting.zsh' /home/$USER/.zshrc
-    sed -i '66 c\source \/usr\/share\/zsh\/plugins\/zsh-autosuggestions\/zsh-autosuggestions.zsh' /home/$USER/.zshrc
-    sed -i '67 c\source \/usr\/share\/zsh\/plugins\/zsh-sudo\/zsh-sudo.zsh' /home/$USER/.zshrc
     cd /usr/share/zsh/plugins
     sudo mkdir zsh-sudo
     sudo chown $USER.$USER zsh-sudo
@@ -185,8 +180,7 @@ execute() {
     sed -i '36 c\-- require("ui.decorations.music")' init.lua
 
     # Background
-    cd /usr/share/backgrounds
-    # Instalar imagen en backgrounds
+    mv $(git rev-parse --show-toplevel)/wallpaper.jpg /usr/share/backgrounds
     cd /home/$USER/.config/awesome
     echo '-- Wallpaper' >> rc.lua
     echo 'local wallpaper_cmd="feh --bg-fill /usr/share/backgrounds/wallpaper.jpg"' >> rc.lua
@@ -199,7 +193,8 @@ execute() {
 
     # Change Icon
     cd /home/$USER/.config/awesome/theme/assets/icons
-
+    rm awesome.png
+    mv $(git rev-parse --show-toplevel)/awesome.png .
 
     # Fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -222,22 +217,13 @@ execute() {
     sed -i '57i \        end,' keys.lua
     sed -i '58i \        {description = "open burpsuite", group = "launcher"}),' keys.lua
 
-    # Zsh Binds
-    cd /home/$USER
-    echo >> .zshrc
-    echo 'bindkey "^[[H" beginning-of-line' >> .zshrc
-    echo 'bindkey "^[[F" end-of-line' >> .zshrc
-    echo 'bindkey "^[[3~" delete-char' >> .zshrc
-    echo 'bindkey "^[[1;3C" forward-word' >> .zshrc
-    echo 'bindkey "^[[1;3D" backward-word' >> .zshrc
-
     # Install programs
     sudo pacman -S --noconfirm burpsuite python-pip responder nmap whatweb wfuzz gobuster
     paru -S --noconfirm wordlists ettercap-gtk
 }
 
 configurePowerlevel10k() {
-    # Configure zsh in user and root
+    # Configure p10k configure in user and root
     cd /home/$USER
     sed -i '37i \    command_execution_time' .p10k.zsh
     sed -i '38i \    context' .p10k.zsh
