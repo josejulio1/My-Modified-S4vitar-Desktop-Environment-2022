@@ -182,7 +182,7 @@ execute() {
     sed -i '36 c\-- require("ui.decorations.music")' init.lua
 
     # Background
-    mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/wallpaper.jpg /home/$USER/.config/awesome/assets
+    mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/wallpaper.jpg /home/$USER/.config/awesome/theme/assets
     cd /home/$USER/.config/awesome
     echo '-- Wallpaper' >> rc.lua
     echo "local wallpaper_cmd=\"feh --bg-fill /home/$USER/.config/awesome/assets/wallpaper.jpg\"" >> rc.lua
