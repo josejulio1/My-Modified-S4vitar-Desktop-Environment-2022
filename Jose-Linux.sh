@@ -185,7 +185,7 @@ execute() {
     mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/wallpaper.jpg /home/$USER/.config/awesome/theme/assets
     cd /home/$USER/.config/awesome
     echo '-- Wallpaper' >> rc.lua
-    echo "local wallpaper_cmd=\"feh --bg-fill /home/$USER/.config/awesome/assets/wallpaper.jpg\"" >> rc.lua
+    echo "local wallpaper_cmd=\"feh --bg-fill /home/$USER/.config/awesome/theme/assets/wallpaper.jpg\"" >> rc.lua
     echo 'os.execute(wallpaper_cmd)' >> rc.lua
 
     # Powerlevel10k
@@ -222,32 +222,17 @@ execute() {
     # Install programs
     sudo pacman -S --noconfirm burpsuite python-pip responder nmap whatweb wfuzz gobuster
     paru -S --noconfirm wordlists ettercap-gtk
-}
 
-configurePowerlevel10k() {
-    # Configure p10k configure in user and root
-    cd /home/$USER
-    sed -i '37i \    command_execution_time' .p10k.zsh
-    sed -i '38i \    context' .p10k.zsh
-    sed -i '47,109d' .p10k.zsh
-    sudo sed -i '37i \    command_execution_time' /root/.p10k.zsh
-    sudo sed -i '38i \    context' /root/.p10k.zsh
-    sudo sed -i '47,109d' /root/.p10k.zsh
-    sudo sed -i '825d' /root/.p10k.zsh
-    sudo sed -i 's/%B%n@%m//g' /root/.p10k.zsh
+    # Configure Powerlevel10k
+    cp /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/user/.p10k.zsh /home/$USER
+    sudo cp /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/root/.p10k.zsh /root
 }
 
 # Main
 if [ $UID != 0 ]; then
-    if [ ! -f /home/$USER/temp ]; then
-        execute
-        touch /home/$USER/temp
-        rm -rf /home/$USER/Downloads/*
-        sudo reboot
-    else
-        configurePowerlevel10k
-        rm -f /home/$USER/temp
-    fi
+    execute
+    rm -rf /home/$USER/Downloads/*
+    sudo reboot
 else
     echo 'Debes ejecutar este script como usuario'
     exit 1
