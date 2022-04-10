@@ -10,7 +10,7 @@ USER=$(ls /home)
 # cfdisk
 # mkfs...
 # mount ... /mnt
-# pacstrap /mnt linux linux-firmware base base-devel grub networkmanager wpa_supplicant vim nano wget sudo gnome kitty
+# pacstrap /mnt linux linux-firmware base base-devel grub networkmanager wpa_supplicant vim nano git sudo gnome kitty
 # genfstab -U /mnt > /mnt/etc/fstab
 # arch-chroot /mnt
 # passwd
@@ -31,11 +31,11 @@ USER=$(ls /home)
 # exit
 # reboot now
 
-
+# git clone in user folder (~)
 
 execute() {
     # Install all
-    sudo pacman -S --noconfirm git gtkmm firefox p7zip xorg xorg-server open-vm-tools xf86-video-vmware xf86-input-vmmouse zsh lsd bat feh neovim
+    sudo pacman -S --noconfirm wget gtkmm firefox p7zip xorg xorg-server open-vm-tools xf86-video-vmware xf86-input-vmmouse zsh lsd bat feh neovim
     paru -S --noconfirm scrub
 
     # Activate services
@@ -77,7 +77,7 @@ execute() {
     sudo rm -r iosevka-2.2.1 iosevka-slab-2.2.1
 
     # Icommon
-    sudo mv $(git rev-parse --show-toplevel)/icomoon.zip .
+    sudo mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/icomoon.zip .
     sudo unzip icomoon.zip
     sudo mv icomoon/*.ttf .
     sudo rm -rf icomoon icomoon.zip
@@ -106,7 +106,7 @@ execute() {
     # Zsh Config
     cd /home/$USER
     rm .zshrc
-    mv $(git rev-parse --show-toplevel)/.zshrc .
+    mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/.zshrc .
     sudo ln -s /home/$USER/.zshrc /root/.zshrc
     # vim .zshrc
     paru -S --noconfirm zsh-syntax-highlighting zsh-autosuggestions
@@ -182,7 +182,7 @@ execute() {
     sed -i '36 c\-- require("ui.decorations.music")' init.lua
 
     # Background
-    mv $(git rev-parse --show-toplevel)/wallpaper.jpg /usr/share/backgrounds
+    mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/wallpaper.jpg /usr/share/backgrounds
     cd /home/$USER/.config/awesome
     echo '-- Wallpaper' >> rc.lua
     echo 'local wallpaper_cmd="feh --bg-fill /usr/share/backgrounds/wallpaper.jpg"' >> rc.lua
@@ -196,7 +196,7 @@ execute() {
     # Change Icon
     cd /home/$USER/.config/awesome/theme/assets/icons
     rm awesome.png
-    mv $(git rev-parse --show-toplevel)/awesome.png .
+    mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/awesome.png .
 
     # Fzf
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
