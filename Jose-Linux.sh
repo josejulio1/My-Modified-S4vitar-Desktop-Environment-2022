@@ -220,7 +220,7 @@ execute() {
     sed -i '58i \        {description = "open burpsuite", group = "launcher"}),' keys.lua
 
     # Install programs
-    sudo pacman -S --noconfirm burpsuite python-pip responder nmap whatweb wfuzz gobuster
+    sudo pacman -S --noconfirm burpsuite python-pip responder nmap whatweb wfuzz gobuster metasploit
     paru -S --noconfirm wordlists ettercap-gtk
 
     # Configure Powerlevel10k
