@@ -1,3 +1,13 @@
+# Colors
+greenColour="\e[0;32m\033[1m"
+endColour="\033[0m\e[0m"
+redColour="\e[0;31m\033[1m"
+blueColour="\e[0;34m\033[1m"
+yellowColour="\e[0;33m\033[1m"
+purpleColour="\e[0;35m\033[1m"
+turquoiseColour="\e[0;36m\033[1m"
+grayColour="\e[0;37m\033[1m"
+
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
 
@@ -64,7 +74,7 @@ alias cat='bat'
 # Plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-sudo/zsh-sudo.zsh
+source /usr/share/zsh/plugins/zsh-sudo/zsh.plugin.zsh
 
 # Functions
 function mkt(){
@@ -72,15 +82,20 @@ function mkt(){
 }
 
 # Extract nmap information
-function extractPorts(){
-	ports="$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
-	ip_address="$(cat $1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u | head -n 1)"
-	echo -e "\n[*] Extracting information...\n" > extractPorts.tmp
-	echo -e "\t[*] IP Address: $ip_address"  >> extractPorts.tmp
-	echo -e "\t[*] Open ports: $ports\n"  >> extractPorts.tmp
-	echo $ports | tr -d '\n' | xclip -sel clip
-	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
-	cat extractPorts.tmp; rm extractPorts.tmp
+function extractPorts() {
+	if [ $1 ]; then
+		echo -e "\n${yellowColour}[+] Extrayendo puertos... ${endColour}\n"
+		IP=$(cat $1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u)
+		PORTS=$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')
+
+		echo -e "\t${blueColour}Dirección IP: ${endColour}$IP\n"
+		echo -e "\t${blueColour}Puertos abiertos: ${endColour}$PORTS\n"
+
+		echo $ports | tr -d '\n' | xclip -sel clip
+		echo -e "${greenColour}[+] Puertos copiados en el portapapeles${endColour}"
+	else
+		echo -e "${redColour}Debes introducir el nombre de un archivo${endColour}"
+	fi
 }
 
 # Set 'man' colors
