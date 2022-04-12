@@ -21,9 +21,10 @@ USER=$(ls /home)
 # vim /etc/locale.gen > uncomment lines 178, 201
 # locale-gen
 # echo "KEYMAP=es" > /etc/vconsole.conf
+# echo "hackMachine" > /etc/hostname
+# echo "LANG=es_ES.UTF-8" > /etc/locale.conf
 # grub-install /dev/sda
 # grub-mkconfig -o /boot/grub/grub.cfg
-# echo "hackMachine" > /etc/hostname
 # vim /etc/hosts > 127.0.0.1 \t localhost, ::1 \t localhost, 127.0.0.1 \t hackMachine.localhost hackMachine
 # systemctl enable NetworkManager
 # systemctl enable wpa_supplicant
@@ -43,7 +44,7 @@ execute() {
     sudo systemctl start vmtoolsd
 
     # Paru
-    cd /home/$USER/Downloads
+    cd /home/$USER/Descargas
     git clone https://aur.archlinux.org/paru-bin.git
     cd paru-bin
     makepkg -si --noconfirm
@@ -86,7 +87,7 @@ execute() {
     paru -S --noconfirm nerd-fonts-jetbrains-mono ttf-font-awesome ttf-font-awesome-4 ttf-material-design-icons
 
     # Dotfiles
-    cd /home/$USER/Downloads
+    cd /home/$USER/Descargas
     git clone https://github.com/rxyhn/dotfiles.git; cd dotfiles
     git checkout c1e2eef2baa91aebd37324891cb282666beae04f
     mkdir /home/$USER/.local/bin
@@ -98,10 +99,6 @@ execute() {
     # Change default shell
     sudo usermod -s /usr/bin/zsh $USER
     sudo usermod -s /usr/bin/zsh root
-
-    # Fix keyboard language
-    setxkbmap es
-    localectl set-x11-keymap es
 
     # Zsh Config
     cd /home/$USER
@@ -238,12 +235,16 @@ execute() {
     su root -c "mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/jose /var/lib/AccountsService/users/$USER"
     sudo chown root.root /var/lib/AccountsService/users/$USER
     sudo sed -i "s/jose/$USER/g" /var/lib/AccountsService/users/$USER
+
+    # Fix keyboard language
+    setxkbmap es
+    localectl set-x11-keymap es
 }
 
 # Main
 if [ $UID != 0 ]; then
     execute
-    rm -rf /home/$USER/Downloads/*
+    rm -rf /home/$USER/Descargas/*
     sudo reboot
 else
     echo 'Debes ejecutar este script como usuario'
