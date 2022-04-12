@@ -235,10 +235,9 @@ execute() {
     sudo sed -i '5i AutomaticLogin=jose' /etc/gdm/custom.conf
 
     # Change Desktop Environment to awesome
-    sudo echo '[User]' > /var/lib/AccountsService/users/$USER
-    sudo echo 'Session=awesome' >> /var/lib/AccountsService/users/$USER
-    sudo echo "Icon=/home/$USER/.face" >> /var/lib/AccountsService/users/$USER
-    sudo echo "SystemAccount=false" >> /var/lib/AccountsService/users/$USER
+    su root -c "mv /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/jose /var/lib/AccountsService/users/$USER"
+    sudo chown root.root /var/lib/AccountsService/users/$USER
+    sudo sed -i "s/jose/$USER/g" /var/lib/AccountsService/users/$USER
 }
 
 # Main
