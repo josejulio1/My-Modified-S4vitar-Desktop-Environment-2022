@@ -223,9 +223,16 @@ execute() {
     sudo pacman -S --noconfirm burpsuite python-pip responder nmap whatweb wfuzz gobuster metasploit
     paru -S --noconfirm wordlists ettercap-gtk
 
+    # Upgrade System
+    pacman -Syu --noconfirm
+
     # Configure Powerlevel10k
     cp /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/user/.p10k.zsh /home/$USER
     sudo cp /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/root/.p10k.zsh /root
+
+    # Autologin
+    sudo sed -i '4i AutomaticLoginEnable=true' /etc/gdm/custom.conf
+    sudo sed -i '5i AutomaticLogin=jose' /etc/gdm/custom.conf
 }
 
 # Main
