@@ -76,7 +76,6 @@ execute() {
     sudo mv 5baeb08d06494fc84dbe36210f6f0ad5.105610 comprimido.zip
     sudo unzip comprimido.zip
     sudo cp iosevka-*2.2.1/ttf*/*.ttf .
-
     sudo rm -r iosevka-2.2.1 iosevka-slab-2.2.1
 
     # Icommon
