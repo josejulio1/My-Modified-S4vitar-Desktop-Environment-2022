@@ -91,7 +91,7 @@ function extractPorts() {
 		echo -e "\t${blueColour}Dirección IP: ${endColour}$IP\n"
 		echo -e "\t${blueColour}Puertos abiertos: ${endColour}$PORTS\n"
 
-		echo $ports | tr -d '\n' | xclip -sel clip
+		echo $PORTS | tr -d '\n' | xclip -sel clip
 		echo -e "${greenColour}[+] Puertos copiados en el portapapeles${endColour}"
 	else
 		echo -e "${redColour}Debes introducir el nombre de un archivo${endColour}"
