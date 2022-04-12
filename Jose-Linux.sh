@@ -224,7 +224,7 @@ execute() {
     paru -S --noconfirm wordlists ettercap-gtk
 
     # Upgrade System
-    pacman -Syu --noconfirm
+    sudo pacman -Syu --noconfirm
 
     # Configure Powerlevel10k
     cp /home/$USER/My-Modified-S4vitar-Desktop-Environment-2022/user/.p10k.zsh /home/$USER
