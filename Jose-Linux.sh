@@ -20,6 +20,8 @@ USER=$(ls /home)
 # vim /etc/sudoers > uncomment line 82
 # vim /etc/locale.gen > uncomment lines 178, 201
 # locale-gen
+# ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
+# hwclock --systohc
 # echo "KEYMAP=es" > /etc/vconsole.conf
 # echo "hackMachine" > /etc/hostname
 # echo "LANG=es_ES.UTF-8" > /etc/locale.conf
