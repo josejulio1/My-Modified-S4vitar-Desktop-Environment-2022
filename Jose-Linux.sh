@@ -38,7 +38,7 @@ USER=$(ls /home)
 
 execute() {
     # Install all
-    sudo pacman -S --noconfirm wget gtkmm firefox p7zip xorg xorg-server open-vm-tools xf86-video-vmware xf86-input-vmmouse zsh lsd bat feh neovim
+    sudo pacman -S --noconfirm wget gtkmm firefox p7zip xorg xorg-server open-vm-tools xf86-video-vmware xf86-input-vmmouse zsh lsd bat feh neovim ntfs-3g
     paru -S --noconfirm scrub
 
     # Activate services
